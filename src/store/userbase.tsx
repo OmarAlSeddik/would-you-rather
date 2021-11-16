@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState: any = {
-  sarahedo: {
+const initialState: any = [
+  {
     id: "sarahedo",
     name: "Sarah Edo",
     avatarURL: "https://semantic-ui.com/images/avatar2/large/molly.png",
@@ -13,7 +13,7 @@ const initialState: any = {
     },
     questions: ["8xf0y6ziyjabvozdd253nd", "am8ehyc8byjqgar0jgpub9"],
   },
-  tylermcginnis: {
+  {
     id: "tylermcginnis",
     name: "Tyler McGinnis",
     avatarURL: "https://semantic-ui.com/images/avatar2/large/matthew.png",
@@ -23,7 +23,7 @@ const initialState: any = {
     },
     questions: ["loxhs1bqm25b708cmbf3g", "vthrdm985a262al8qx3do"],
   },
-  johndoe: {
+  {
     id: "johndoe",
     name: "John Doe",
     avatarURL: "https://semantic-ui.com/images/avatar/large/elliot.jpg",
@@ -34,7 +34,7 @@ const initialState: any = {
     },
     questions: ["6ni6ok3ym7mf1p33lnez", "xj352vofupe1dqz9emx13r"],
   },
-};
+];
 
 const userbaseSlice = createSlice({
   name: "users",

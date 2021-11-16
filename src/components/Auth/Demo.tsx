@@ -1,18 +1,17 @@
 import {
-  Card,
   Stack,
   Typography,
-  MenuItem,
   TextField,
+  MenuItem,
   Button,
+  Card,
 } from "@mui/material";
 
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "../../store";
-import { authenticationActions } from "../../store/authentication";
 import { useState } from "react";
 
-const LoginCard = () => {
+const Demo = () => {
   const userbase: any = useSelector((state: RootState) => state.userbase);
   const [user, setUser] = useState("");
 
@@ -20,17 +19,12 @@ const LoginCard = () => {
     setUser(event.target.value as string);
   };
 
-  const userOptions = Object.keys(userbase).map((userId) => ({
-    key: userId,
-    id: userId,
-    name: userbase[userId].name,
-    image: { avatar: true, src: userbase[userId].avatarURL },
+  const userOptions = userbase.map((user: any) => ({
+    key: user.id,
+    id: user.id,
+    name: user.name,
+    image: { avatar: true, src: user.avatarURL },
   }));
-
-  const dispatch = useDispatch();
-  const handleAuthentication = () => {
-    dispatch(authenticationActions.login());
-  };
 
   return (
     <Card
@@ -38,11 +32,17 @@ const LoginCard = () => {
       sx={{
         width: "21rem",
         padding: "2rem",
+        marginBottom: "1rem",
       }}
     >
       <Stack>
-        <Typography align="center" component="h1" sx={{ marginBottom: "2rem" }}>
-          Login to Your Account
+        <Typography
+          align="center"
+          variant="h6"
+          component="h2"
+          sx={{ marginBottom: "1rem" }}
+        >
+          Sign Into a Demo Account
         </Typography>
         <TextField
           id="select-user"
@@ -50,23 +50,22 @@ const LoginCard = () => {
           label="Select User"
           value={user}
           onChange={handleChange}
-          helperText="Please select the user"
+          helperText="Select a demo user."
+          size="small"
         >
-          {userOptions.map((user) => (
+          {userOptions.map((user: any) => (
             <MenuItem value={user.id}>{user.name}</MenuItem>
           ))}
         </TextField>
-
         <Button
           variant="contained"
-          sx={{ marginTop: "1rem" }}
-          onClick={handleAuthentication}
+          sx={{ marginTop: "1rem", textTransform: "capitalize" }}
         >
-          Login
+          Sign In
         </Button>
       </Stack>
     </Card>
   );
 };
 
-export default LoginCard;
+export default Demo;

@@ -1,11 +1,13 @@
-import useStickyState from "../../hooks/useStickyState";
+import { useState } from "react";
 
 import { Tabs, Tab } from "@mui/material";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useLocation } from "react-router-dom";
 
 const Navigation = () => {
-  const [pageValue, setPageValue] = useStickyState(0, "page");
-  const handlePageChange = (event: React.ChangeEvent<{}>, newValue: number) => {
+  const location = useLocation();
+
+  const [pageValue, setPageValue] = useState(location.pathname);
+  const handlePageChange = (event: React.ChangeEvent<{}>, newValue: string) => {
     setPageValue(newValue);
   };
 
@@ -31,6 +33,7 @@ const Navigation = () => {
         }}
         component={RouterLink}
         to="/"
+        value="/"
       />
       <Tab
         label="add a question"
@@ -41,6 +44,7 @@ const Navigation = () => {
         }}
         component={RouterLink}
         to="/add-a-question"
+        value="/add-a-question"
       />
       <Tab
         label="leaderboard"
@@ -51,6 +55,7 @@ const Navigation = () => {
         }}
         component={RouterLink}
         to="/leaderboard"
+        value="/leaderboard"
       />
     </Tabs>
   );

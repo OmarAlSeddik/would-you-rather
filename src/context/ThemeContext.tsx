@@ -27,11 +27,11 @@ export const ThemeContextProvider = (props: any) => {
           },
           background: {
             default: alpha("#fff", 0.1),
-            // paper: alpha("#fff", 0.95),
+            paper: alpha("#fff", 0.95),
           },
         },
         shape: {
-          borderRadius: 4,
+          borderRadius: 12,
         },
       }),
     []
