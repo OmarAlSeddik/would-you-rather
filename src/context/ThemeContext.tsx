@@ -7,7 +7,7 @@ import {
   ThemeProvider,
   CssBaseline,
 } from "@mui/material";
-import { blue } from "@mui/material/colors";
+import { grey } from "@mui/material/colors";
 
 const ThemeContext = createContext({
   theme: {},
@@ -20,18 +20,17 @@ export const ThemeContextProvider = (props: any) => {
       createTheme({
         palette: {
           primary: {
-            main: blue[900],
+            main: grey[900],
           },
           secondary: {
-            main: alpha(blue[900], 0.2),
+            main: alpha(grey[900], 0.2),
           },
           background: {
-            default: alpha("#fff", 0.1),
-            paper: alpha("#fff", 0.95),
+            default: alpha(grey[900], 0.1),
           },
         },
         shape: {
-          borderRadius: 12,
+          borderRadius: 8,
         },
       }),
     []

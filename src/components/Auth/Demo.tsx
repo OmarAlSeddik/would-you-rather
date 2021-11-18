@@ -59,7 +59,7 @@ const Demo = () => {
         </TextField>
         <Button
           variant="contained"
-          sx={{ marginTop: "1rem", textTransform: "capitalize" }}
+          sx={{ marginTop: "1rem", textTransform: "none" }}
         >
           Sign In
         </Button>

@@ -17,7 +17,8 @@ const Navigation = () => {
       onChange={handlePageChange}
       variant="fullWidth"
       sx={{
-        width: { xs: "100%", sm: "35rem" },
+        width: "35rem",
+        maxWidth: "100vw",
         ".MuiTabs-indicator": {
           height: "100%",
           backgroundColor: "secondary.main",
@@ -25,10 +26,10 @@ const Navigation = () => {
       }}
     >
       <Tab
-        label="home"
+        label="Home"
         disableRipple
         sx={{
-          textTransform: "capitalize",
+          textTransform: "none",
           "&:hover": { color: "primary.main" },
         }}
         component={RouterLink}
@@ -36,21 +37,21 @@ const Navigation = () => {
         value="/"
       />
       <Tab
-        label="add a question"
+        label="Ask a Question"
         disableRipple
         sx={{
-          textTransform: "capitalize",
+          textTransform: "none",
           "&:hover": { color: "primary.main" },
         }}
         component={RouterLink}
-        to="/add-a-question"
-        value="/add-a-question"
+        to="/ask-a-question"
+        value="/ask-a-question"
       />
       <Tab
-        label="leaderboard"
+        label="Leaderboard"
         disableRipple
         sx={{
-          textTransform: "capitalize",
+          textTransform: "none",
           "&:hover": { color: "primary.main" },
         }}
         component={RouterLink}

@@ -130,8 +130,8 @@ const SignUpCard = () => {
           variant="text"
           size="small"
           disableRipple
-          onClick={switchAuthModeHandler}
           sx={{ textTransform: "none" }}
+          onClick={switchAuthModeHandler}
         >
           Sign in with an existing account
         </Button>

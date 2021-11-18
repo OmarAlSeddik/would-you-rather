@@ -13,14 +13,19 @@ const Auth = () => {
     <Stack
       justifyContent="center"
       alignItems="center"
-      sx={{ height: "100vh", backgroundColor: "background.default" }}
+      sx={{
+        height: "100vh",
+        minHeight: "700px",
+        backgroundColor: "background.default",
+      }}
     >
       <Logo />
       <Demo />
       <Typography
         align="center"
+        color="primary"
         variant="h5"
-        component="body"
+        component="p"
         sx={{ marginBottom: "1rem" }}
       >
         -- OR --

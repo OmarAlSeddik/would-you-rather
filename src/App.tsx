@@ -4,9 +4,11 @@ import Header from "./components/Header";
 import Auth from "./components/Auth";
 import Home from "./components/Home";
 import Leaderboard from "./components/Leaderboard";
-import AddQuestion from "./components/AddQuestion";
+import AddQuestion from "./components/AskQuestion";
 import { useSelector } from "react-redux";
 import { RootState } from "./store";
+import PageNotFound from "./components/PageNotFound";
+import AnswerQuestion from "./components/AnswerQuestion";
 
 const App = () => {
   const isLoggedIn = useSelector<RootState>((state) => state.auth.isLoggedIn);
@@ -26,7 +28,7 @@ const App = () => {
             element={isLoggedIn ? <Home /> : <Navigate to="/auth" />}
           />
           <Route
-            path="add-a-question"
+            path="ask-a-question"
             element={isLoggedIn ? <AddQuestion /> : <Navigate to="/auth" />}
           />
           <Route
@@ -35,7 +37,11 @@ const App = () => {
           />
           <Route
             path="*"
-            element={isLoggedIn ? <Navigate to="/" /> : <Navigate to="/auth" />}
+            element={isLoggedIn ? <PageNotFound /> : <Navigate to="/auth" />}
+          />
+          <Route
+            path="/answer-a-question"
+            element={isLoggedIn ? <AnswerQuestion /> : <Navigate to="/auth" />}
           />
         </Routes>
       </BrowserRouter>

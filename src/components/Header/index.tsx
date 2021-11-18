@@ -4,7 +4,7 @@ import Navigation from "./Navigation";
 
 const Header = () => {
   return (
-    <AppBar color="default" position="sticky" sx={{ borderRadius: 0 }}>
+    <AppBar color="default" position="fixed" sx={{ borderRadius: 0 }}>
       <Head />
       <Navigation />
     </AppBar>

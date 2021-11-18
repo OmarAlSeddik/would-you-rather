@@ -31,7 +31,7 @@ const Head = () => {
             src=""
             sx={{ height: "2rem", width: "2rem", marginRight: "0.5rem" }}
           />
-          Omar Al Seddik
+          [user.name]
         </ButtonBase>
       </Stack>
     </Paper>
