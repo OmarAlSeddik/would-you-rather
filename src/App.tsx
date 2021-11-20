@@ -5,14 +5,28 @@ import Auth from "./components/Auth";
 import Home from "./components/Home";
 import Leaderboard from "./components/Leaderboard";
 import AddQuestion from "./components/AskQuestion";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "./store";
 import PageNotFound from "./components/PageNotFound";
 import AnswerQuestion from "./components/AnswerQuestion";
+import { useEffect } from "react";
+import { fetchUserbaseData, sendUserbaseData } from "./store/userbase";
+
+let isInitialRender = true;
 
 const App = () => {
-  const isLoggedIn = useSelector<RootState>((state) => state.auth.isLoggedIn);
-  console.log(isLoggedIn);
+  const dispatch = useDispatch();
+  const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
+  const userbase = useSelector((state: RootState) => state.userbase);
+
+  useEffect(() => {
+    if (isInitialRender) {
+      isInitialRender = false;
+      dispatch(fetchUserbaseData());
+    } else dispatch(sendUserbaseData(userbase));
+  }, [dispatch, userbase]);
+
+  console.log(userbase);
 
   return (
     <ThemeContextProvider>

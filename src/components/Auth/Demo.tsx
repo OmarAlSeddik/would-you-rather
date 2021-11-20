@@ -1,30 +1,45 @@
-import {
-  Stack,
-  Typography,
-  TextField,
-  MenuItem,
-  Button,
-  Card,
-} from "@mui/material";
+import { Stack, Typography, TextField, MenuItem, Card } from "@mui/material";
+import LoadingButton from "@mui/lab/LoadingButton";
 
-import { useSelector } from "react-redux";
-import { RootState } from "../../store";
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../../store";
+import { authActions } from "../../store/auth";
+
+import { auth } from "../../firebase";
+import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 
 const Demo = () => {
-  const userbase: any = useSelector((state: RootState) => state.userbase);
-  const [user, setUser] = useState("");
+  const dispatch = useDispatch();
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUser(event.target.value as string);
+  const userbase: any = useSelector((state: RootState) => state.userbase);
+  const [selectedUser, setSelectedUser] = useState<any>("");
+
+  const handleSelectedUserChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setSelectedUser(event.target.value as string);
   };
 
-  const userOptions = userbase.map((user: any) => ({
-    key: user.id,
-    id: user.id,
-    name: user.name,
-    image: { avatar: true, src: user.avatarURL },
-  }));
+  const [signInWithEmailAndPassword, user, loading, error] =
+    useSignInWithEmailAndPassword(auth);
+
+  const handleSubmit = () => {
+    const email = selectedUser.email || "";
+    const password = "123456";
+    return signInWithEmailAndPassword(email, password);
+  };
+
+  if (user) dispatch(authActions.login());
+
+  const userOptions = () => {
+    const optionsArray = [];
+    for (let i = 0; i < 3; i++) userbase[i] && optionsArray.push(userbase[i]);
+    return optionsArray;
+  };
+
+  console.log(selectedUser);
+  console.log(error);
 
   return (
     <Card
@@ -48,21 +63,25 @@ const Demo = () => {
           id="select-user"
           select
           label="Select User"
-          value={user}
-          onChange={handleChange}
+          error={!!error}
+          value={selectedUser}
+          onChange={handleSelectedUserChange}
           helperText="Select a demo user."
           size="small"
         >
-          {userOptions.map((user: any) => (
-            <MenuItem value={user.id}>{user.name}</MenuItem>
+          {userOptions().map((user: any) => (
+            <MenuItem value={user}>{user.username}</MenuItem>
           ))}
         </TextField>
-        <Button
+        <LoadingButton
           variant="contained"
-          sx={{ marginTop: "1rem", textTransform: "none" }}
+          loading={loading}
+          loadingPosition="end"
+          sx={{ margin: "1rem 0", textTransform: "none" }}
+          onClick={handleSubmit}
         >
-          Sign In
-        </Button>
+          {loading ? "Loading..." : "Sign In"}
+        </LoadingButton>
       </Stack>
     </Card>
   );

@@ -1,10 +1,11 @@
 import { Card, Stack, Typography, TextField, Button } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
 
+import { useRef } from "react";
 import { authActions } from "../../store/auth";
 import { useDispatch } from "react-redux";
+
 import { auth } from "../../firebase";
-import { useRef } from "react";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 
 const SignInCard = () => {

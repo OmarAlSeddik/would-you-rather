@@ -1,19 +1,32 @@
-import { Card, Stack, Typography, TextField, Button } from "@mui/material";
+import {
+  Card,
+  Stack,
+  Typography,
+  TextField,
+  Button,
+  MenuItem,
+} from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
 
+import { useState } from "react";
 import { authActions } from "../../store/auth";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { auth } from "../../firebase";
 import { useRef } from "react";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
+import { Box } from "@mui/system";
+import { RootState } from "../../store";
+import { userbaseActions } from "../../store/userbase";
 
 const SignUpCard = () => {
   const dispatch = useDispatch();
+  const userbase = useSelector<RootState>((state) => state.userbase);
 
   const switchAuthModeHandler = () => {
     dispatch(authActions.toggleAuthMode());
   };
 
+  const usernameInputRef = useRef<HTMLInputElement>(null);
   const emailInputRef = useRef<HTMLInputElement>(null);
   const passwordInputRef = useRef<HTMLInputElement>(null);
   const [createUserWithEmailAndPassword, user, loading, error] =
@@ -23,6 +36,12 @@ const SignUpCard = () => {
     const email = emailInputRef?.current?.value || "";
     const password = passwordInputRef?.current?.value || "";
     return createUserWithEmailAndPassword(email, password);
+  };
+
+  const avatars: any = useSelector<RootState>((state) => state.avatars);
+  const [avatar, setAvatar] = useState("1");
+  const handleAvatarChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setAvatar(event.target.value);
   };
 
   const emailError = () => {
@@ -63,7 +82,21 @@ const SignUpCard = () => {
     } else return "Needs to be at least 6 characters long.";
   };
 
-  if (user)
+  if (user) {
+    const email = emailInputRef?.current?.value || "";
+    const username = usernameInputRef?.current?.value || "";
+    if (email)
+      dispatch(
+        userbaseActions.addUser({
+          email,
+          username,
+          avatar,
+          answers: {},
+          questions: [],
+        })
+      );
+    console.log(userbase);
+
     return (
       <Card raised sx={{ width: "21rem", padding: "2rem" }}>
         <Stack>
@@ -81,6 +114,7 @@ const SignUpCard = () => {
         </Stack>
       </Card>
     );
+  }
 
   return (
     <Card
@@ -117,6 +151,33 @@ const SignUpCard = () => {
           error={passwordError()}
           helperText={passwordHelperText()}
         />
+        <TextField
+          size="small"
+          id="username"
+          label="Username"
+          inputRef={usernameInputRef}
+          helperText="No restrictions. Doesn't have to be unique. "
+          sx={{ marginBottom: "0.25rem" }}
+        />
+        <TextField
+          select
+          size="small"
+          id="avatar"
+          label="Avatar"
+          value={avatar}
+          onChange={handleAvatarChange}
+          helperText="Select your avatar."
+        >
+          {avatars.map((avatar: any) => (
+            <MenuItem
+              key={avatar.value}
+              value={avatar.value}
+              sx={{ margin: "0 auto" }}
+            >
+              <Box sx={{ width: "3rem", margin: "0 auto" }}>{avatar.label}</Box>
+            </MenuItem>
+          ))}
+        </TextField>
         <LoadingButton
           variant="contained"
           loading={loading}
