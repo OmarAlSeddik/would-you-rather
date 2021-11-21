@@ -30,7 +30,7 @@ const Demo = () => {
     return signInWithEmailAndPassword(email, password);
   };
 
-  if (user) dispatch(authActions.login());
+  if (user) dispatch(authActions.login(user));
 
   const userOptions = () => {
     const optionsArray = [];
@@ -38,15 +38,12 @@ const Demo = () => {
     return optionsArray;
   };
 
-  console.log(selectedUser);
-  console.log(error);
-
   return (
     <Card
       raised
       sx={{
         width: "21rem",
-        padding: "2rem",
+        padding: "1rem 2rem",
         marginBottom: "1rem",
       }}
     >

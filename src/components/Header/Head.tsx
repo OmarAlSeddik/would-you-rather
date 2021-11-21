@@ -1,7 +1,38 @@
-import { Paper, Stack, Typography, Avatar, ButtonBase } from "@mui/material";
+import {
+  Paper,
+  Stack,
+  Typography,
+  Avatar,
+  ButtonBase,
+  Menu,
+  MenuItem,
+} from "@mui/material";
 import QuestionAnswerTwoToneIcon from "@mui/icons-material/QuestionAnswerTwoTone";
+import LogoutIcon from "@mui/icons-material/Logout";
+
+import { useState } from "react";
+import useUser from "../../hooks/useUser";
+
+import { useDispatch } from "react-redux";
+import { authActions } from "../../store/auth";
 
 const Head = () => {
+  const [user, avatar] = useUser();
+
+  const dispatch = useDispatch();
+  const handleLogout = () => {
+    dispatch(authActions.logout());
+  };
+
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = anchorEl ? true : false;
+  const handleOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <Paper sx={{ borderRadius: 0 }}>
       <Stack
@@ -25,14 +56,36 @@ const Head = () => {
             marginLeft: "auto",
             textTransform: "capitalize",
           }}
+          onClick={handleOpen}
         >
-          <Avatar
-            alt="Omar Al Seddik"
-            src=""
-            sx={{ height: "2rem", width: "2rem", marginRight: "0.5rem" }}
-          />
-          [user.name]
+          <Avatar sx={{ marginRight: "0.5rem" }}>{avatar}</Avatar>
+          <Typography>{user.username}</Typography>
         </ButtonBase>
+        <Menu
+          anchorEl={anchorEl}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "left",
+          }}
+          open={open}
+          onClose={handleClose}
+          sx={{ ".MuiMenu-list": { padding: 0 } }}
+        >
+          <MenuItem
+            onClick={() => {
+              handleClose();
+              handleLogout();
+            }}
+          >
+            <Stack direction="row" justifyContent="space-between">
+              <LogoutIcon
+                fontSize="small"
+                sx={{ marginRight: 1, color: "primary.main" }}
+              />
+              <Typography>Logout</Typography>
+            </Stack>
+          </MenuItem>
+        </Menu>
       </Stack>
     </Paper>
   );

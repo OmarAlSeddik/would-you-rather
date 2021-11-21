@@ -1,14 +1,17 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { ThemeContextProvider } from "./context/ThemeContext";
 import Header from "./components/Header";
 import Auth from "./components/Auth";
 import Home from "./components/Home";
 import Leaderboard from "./components/Leaderboard";
 import AddQuestion from "./components/AskQuestion";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "./store";
 import PageNotFound from "./components/PageNotFound";
 import AnswerQuestion from "./components/AnswerQuestion";
+
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { ThemeContextProvider } from "./context/ThemeContext";
+
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "./store";
+
 import { useEffect } from "react";
 import { fetchUserbaseData, sendUserbaseData } from "./store/userbase";
 
@@ -25,8 +28,6 @@ const App = () => {
       dispatch(fetchUserbaseData());
     } else dispatch(sendUserbaseData(userbase));
   }, [dispatch, userbase]);
-
-  console.log(userbase);
 
   return (
     <ThemeContextProvider>

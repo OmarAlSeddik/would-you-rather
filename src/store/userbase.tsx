@@ -15,6 +15,7 @@ const userbaseSlice = createSlice({
       );
       if (!existingUser) {
         state.push({
+          id: newUser.id,
           email: newUser.email,
           username: newUser.username,
           avatar: newUser.avatar,

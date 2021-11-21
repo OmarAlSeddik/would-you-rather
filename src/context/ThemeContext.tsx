@@ -23,10 +23,10 @@ export const ThemeContextProvider = (props: any) => {
             main: grey[900],
           },
           secondary: {
-            main: alpha(blue[900], 0.2),
+            main: alpha(blue[400], 0.2),
           },
           background: {
-            default: alpha(blue[900], 0.1),
+            default: alpha(blue[400], 0.1),
           },
         },
         shape: {

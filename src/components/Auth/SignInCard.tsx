@@ -26,7 +26,7 @@ const SignInCard = () => {
     return signInWithEmailAndPassword(email, password);
   };
 
-  if (user) dispatch(authActions.login());
+  if (user) dispatch(authActions.login(user));
 
   const emailError = () => {
     return (
@@ -79,7 +79,7 @@ const SignInCard = () => {
       raised
       sx={{
         width: "21rem",
-        padding: "2rem",
+        padding: "1rem 2rem",
       }}
     >
       <Stack>
@@ -98,7 +98,7 @@ const SignInCard = () => {
           error={emailError()}
           helperText={emailHelperText()}
           inputRef={emailInputRef}
-          sx={{ marginBottom: "0.25rem" }}
+          sx={{ marginBottom: "0.5rem" }}
         />
         <TextField
           size="small"

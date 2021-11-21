@@ -1,4 +1,4 @@
-import { Stack, Typography } from "@mui/material";
+import { Stack, Typography, Link } from "@mui/material";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 import Demo from "./Demo";
@@ -8,14 +8,32 @@ import SignUpCard from "./SignUpCard";
 
 const Auth = () => {
   const isSignIn = useSelector((state: RootState) => state.auth.isSignIn);
+  const forgotPassword = (
+    <Typography align="center" sx={{ padding: "1rem" }}>
+      Forgot your password? Have a good think and try to remember.
+    </Typography>
+  );
+  const avatarCredit = (
+    <Stack alignItems="center">
+      <Typography align="center" sx={{ padding: "1rem" }}>
+        Avatar vectors created by:
+        <Link
+          href="https://www.freepik.com/pikisuperstar"
+          color="#0d47a1"
+          sx={{ marginLeft: "0.5rem" }}
+        >
+          pikisuperstar
+        </Link>
+      </Typography>
+    </Stack>
+  );
 
   return (
     <Stack
       justifyContent="center"
       alignItems="center"
       sx={{
-        height: "100vh",
-        minHeight: "700px",
+        minHeight: "100vh",
         backgroundColor: "background.default",
       }}
     >
@@ -31,6 +49,7 @@ const Auth = () => {
         -- OR --
       </Typography>
       {isSignIn ? <SignInCard /> : <SignUpCard />}
+      {isSignIn ? forgotPassword : avatarCredit}
     </Stack>
   );
 };

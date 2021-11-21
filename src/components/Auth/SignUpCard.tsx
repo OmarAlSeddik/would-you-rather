@@ -5,6 +5,7 @@ import {
   TextField,
   Button,
   MenuItem,
+  Avatar,
 } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
 
@@ -14,13 +15,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { auth } from "../../firebase";
 import { useRef } from "react";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
-import { Box } from "@mui/system";
 import { RootState } from "../../store";
 import { userbaseActions } from "../../store/userbase";
 
 const SignUpCard = () => {
   const dispatch = useDispatch();
-  const userbase = useSelector<RootState>((state) => state.userbase);
 
   const switchAuthModeHandler = () => {
     dispatch(authActions.toggleAuthMode());
@@ -88,6 +87,7 @@ const SignUpCard = () => {
     if (email)
       dispatch(
         userbaseActions.addUser({
+          id: user.user.uid,
           email,
           username,
           avatar,
@@ -95,7 +95,6 @@ const SignUpCard = () => {
           questions: [],
         })
       );
-    console.log(userbase);
 
     return (
       <Card raised sx={{ width: "21rem", padding: "2rem" }}>
@@ -121,7 +120,7 @@ const SignUpCard = () => {
       raised
       sx={{
         width: "21rem",
-        padding: "2rem",
+        padding: "1rem 2rem",
       }}
     >
       <Stack>
@@ -140,7 +139,7 @@ const SignUpCard = () => {
           inputRef={emailInputRef}
           error={emailError()}
           helperText={emailHelperText()}
-          sx={{ marginBottom: "0.25rem" }}
+          sx={{ marginBottom: "0.5rem" }}
         />
         <TextField
           size="small"
@@ -150,6 +149,7 @@ const SignUpCard = () => {
           inputRef={passwordInputRef}
           error={passwordError()}
           helperText={passwordHelperText()}
+          sx={{ marginBottom: "0.5rem" }}
         />
         <TextField
           size="small"
@@ -157,7 +157,7 @@ const SignUpCard = () => {
           label="Username"
           inputRef={usernameInputRef}
           helperText="No restrictions. Doesn't have to be unique. "
-          sx={{ marginBottom: "0.25rem" }}
+          sx={{ marginBottom: "0.5rem" }}
         />
         <TextField
           select
@@ -174,7 +174,9 @@ const SignUpCard = () => {
               value={avatar.value}
               sx={{ margin: "0 auto" }}
             >
-              <Box sx={{ width: "3rem", margin: "0 auto" }}>{avatar.label}</Box>
+              <Avatar sx={{ width: "5rem", height: "5rem", margin: "0 auto" }}>
+                {avatar.label}
+              </Avatar>
             </MenuItem>
           ))}
         </TextField>

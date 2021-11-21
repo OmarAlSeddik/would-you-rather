@@ -7,6 +7,14 @@ import { RootState } from "../../store";
 
 const LeaderboardBody = () => {
   const userbase = useSelector((state: RootState) => state.userbase);
+  const avatars = useSelector((state: RootState) => state.avatars);
+  const loadAvatar = (user: any) => {
+    const loadedAvatarObject = avatars.find(
+      (avatarObject) => avatarObject.value === user.avatar
+    );
+
+    return loadedAvatarObject?.label;
+  };
 
   return (
     <TableBody>
@@ -16,22 +24,20 @@ const LeaderboardBody = () => {
           sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
         >
           <StyledTableCell align="center">
-            {Object.keys(user.answers).length + user.questions.length}
+            {(user.answers ? Object.keys(user.answers).length : 0) +
+              (user.questions ? user.questions.length : 0)}
           </StyledTableCell>
           <StyledTableCell scope="row">
-            <Avatar
-              src={user.avatarURL}
-              sx={{ width: "2rem", height: "2rem" }}
-            />
+            <Avatar>{loadAvatar(user)}</Avatar>
           </StyledTableCell>
           <StyledTableCell component="th" scope="row">
-            {user.name}
+            {user.username}
           </StyledTableCell>
           <StyledTableCell align="center">
-            {Object.keys(user.answers).length}
+            {user.answers ? Object.keys(user.answers).length : 0}
           </StyledTableCell>
           <StyledTableCell align="center">
-            {user.questions.length}
+            {user.questions ? user.questions.length : 0}
           </StyledTableCell>
         </StyledTableRow>
       ))}
