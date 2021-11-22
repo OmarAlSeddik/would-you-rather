@@ -49,7 +49,7 @@ const App = () => {
             element={isLoggedIn ? <Home /> : <Navigate to="/auth" />}
           />
           <Route
-            path="/ask-a-question"
+            path="/add"
             element={isLoggedIn ? <AddQuestion /> : <Navigate to="/auth" />}
           />
           <Route
@@ -57,7 +57,7 @@ const App = () => {
             element={isLoggedIn ? <Leaderboard /> : <Navigate to="/auth" />}
           />
           <Route
-            path=":id"
+            path="/questions/:question_id"
             element={isLoggedIn ? <AnswerQuestion /> : <Navigate to="/auth" />}
           />
           <Route

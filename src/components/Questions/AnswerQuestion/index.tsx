@@ -9,7 +9,7 @@ import useQuestion from "../../../hooks/useQuestion";
 
 const AnswerQuestion = () => {
   const params = useParams();
-  const question = useQuestion(params.id || "");
+  const question = useQuestion(params.question_id || "");
 
   return (
     <Box sx={{ height: "100vh" }}>

@@ -49,8 +49,8 @@ const Navigation = () => {
           "&:hover": { color: "primary.main" },
         }}
         component={RouterLink}
-        to="/ask-a-question"
-        value="/ask-a-question"
+        to="/add"
+        value="/add"
       />
       <Tab
         label="Leaderboard"

@@ -17,6 +17,7 @@ import { useDispatch } from "react-redux";
 import { questionsActions } from "../../../store/questions";
 import { userbaseActions } from "../../../store/userbase";
 import useUser from "../../../hooks/useUser";
+import { Link } from "react-router-dom";
 
 const CardBody = (props: any) => {
   const dispatch = useDispatch();
@@ -81,28 +82,80 @@ const CardBody = (props: any) => {
         <Typography variant="h5" component="h2">
           Would you rather...
         </Typography>
-        <Card raised sx={{ padding: "1rem", marginBottom: "1rem" }}>
-          <Stack>
-            <Typography>{props.question.option1}</Typography>
-            <LinearProgressWithLabel
-              value={(option1Votes * 100) / totalVotes}
-            />
-            <Typography align="center">
-              {option1Votes} out of {totalVotes} votes.
-            </Typography>
-          </Stack>
-        </Card>
-        <Card raised sx={{ padding: "1rem" }}>
-          <Stack>
-            <Typography>{props.question.option2}</Typography>
-            <LinearProgressWithLabel
-              value={(option2Votes * 100) / totalVotes}
-            />
-            <Typography align="center">
-              {option2Votes} out of {totalVotes} votes.
-            </Typography>
-          </Stack>
-        </Card>
+        {user.votes[props.question.id] === "1" ? (
+          <Card
+            raised
+            sx={{
+              padding: "1rem",
+              marginBottom: "1rem",
+              backgroundColor: "success.main",
+            }}
+          >
+            <Stack>
+              <Typography sx={{ color: "white" }}>
+                {props.question.option1}
+              </Typography>
+              <LinearProgressWithLabel
+                value={(option1Votes * 100) / totalVotes}
+              />
+              <Typography align="center" sx={{ color: "white" }}>
+                {option1Votes} out of {totalVotes} votes.
+              </Typography>
+            </Stack>
+          </Card>
+        ) : (
+          <Card raised sx={{ padding: "1rem", marginBottom: "1rem" }}>
+            <Stack>
+              <Typography>{props.question.option1}</Typography>
+              <LinearProgressWithLabel
+                value={(option1Votes * 100) / totalVotes}
+              />
+              <Typography align="center">
+                {option1Votes} out of {totalVotes} votes.
+              </Typography>
+            </Stack>
+          </Card>
+        )}
+
+        {user.votes[props.question.id] === "2" ? (
+          <Card
+            raised
+            sx={{ padding: "1rem", backgroundColor: "success.main" }}
+          >
+            <Stack>
+              <Typography sx={{ color: "white" }}>
+                {props.question.option2}
+              </Typography>
+              <LinearProgressWithLabel
+                value={(option2Votes * 100) / totalVotes}
+                sx={{ backgroundColor: "white" }}
+              />
+              <Typography align="center" sx={{ color: "white" }}>
+                {option2Votes} out of {totalVotes} votes.
+              </Typography>
+            </Stack>
+          </Card>
+        ) : (
+          <Card raised sx={{ padding: "1rem" }}>
+            <Stack>
+              <Typography>{props.question.option2}</Typography>
+              <LinearProgressWithLabel
+                value={(option2Votes * 100) / totalVotes}
+              />
+              <Typography align="center">
+                {option2Votes} out of {totalVotes} votes.
+              </Typography>
+            </Stack>
+          </Card>
+        )}
+        <Button
+          variant="contained"
+          sx={{ width: "6rem", margin: "1rem auto 0" }}
+          component={Link}
+          to="/"
+        >
+          Go Back
+        </Button>
       </Stack>
     );
   }

@@ -13,7 +13,7 @@ const CardBody = (props: any) => {
       </Typography>
       <Button
         component={Link}
-        to={props.id}
+        to={`/questions/${props.id}`}
         variant="contained"
         sx={{ width: "6rem", margin: "0 auto" }}
       >
