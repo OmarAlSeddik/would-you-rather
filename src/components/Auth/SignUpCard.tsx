@@ -91,8 +91,6 @@ const SignUpCard = () => {
           email,
           username,
           avatar,
-          answers: {},
-          questions: [],
         })
       );
 

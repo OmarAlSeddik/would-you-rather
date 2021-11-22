@@ -1,10 +1,16 @@
 import { useState } from "react";
 
 import { Card, Stack, ToggleButton, ToggleButtonGroup } from "@mui/material";
-import Question from "./Question";
 import { Box } from "@mui/system";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
+import useUser from "../../hooks/useUser";
+
+import QuestionCard from "../Questions/QuestionCard";
 
 const Home = () => {
+  const [user] = useUser();
+
   const [tapValue, setTabValue] = useState("unanswered");
   const handleTabValue = (
     event: React.MouseEvent<HTMLElement>,
@@ -15,22 +21,42 @@ const Home = () => {
     }
   };
 
+  const questions = useSelector((state: RootState) => state.questions);
+
   const unansweredQuestions = (
     <Stack>
-      <Question />
-      <Question />
-      <Question />
-      <Question />
-      <Question />
-      <Question />
+      {questions
+        .filter((question: any) => {
+          if (!user.votes) return true;
+          if (!user.votes.hasOwnProperty(question.id)) return true;
+          else return false;
+        })
+        .map((question: any) => (
+          <QuestionCard
+            id={question.id}
+            option1={question.option1}
+            author={question.author}
+            avatar={question.avatar}
+          />
+        ))}
     </Stack>
   );
 
   const answeredQuestions = (
     <Stack>
-      <Question />
-      <Question />
-      <Question />
+      {questions
+        .filter(
+          (question: any) =>
+            user.votes && user.votes.hasOwnProperty(question.id)
+        )
+        .map((question: any) => (
+          <QuestionCard
+            id={question.id}
+            option1={question.option1}
+            author={question.author}
+            avatar={question.avatar}
+          />
+        ))}
     </Stack>
   );
 

@@ -8,11 +8,13 @@ import SignUpCard from "./SignUpCard";
 
 const Auth = () => {
   const isSignIn = useSelector((state: RootState) => state.auth.isSignIn);
+
   const forgotPassword = (
     <Typography align="center" sx={{ padding: "1rem" }}>
       Forgot your password? Have a good think and try to remember.
     </Typography>
   );
+  
   const avatarCredit = (
     <Stack alignItems="center">
       <Typography align="center" sx={{ padding: "1rem" }}>

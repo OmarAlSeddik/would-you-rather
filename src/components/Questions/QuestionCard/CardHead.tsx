@@ -1,30 +1,25 @@
 import { Stack, Typography, Avatar } from "@mui/material";
+import useAvatar from "../../../hooks/useAvatar";
 
-const CardHead = () => {
+const CardHead = (props: any) => {
+  const avatar = useAvatar(props.avatar);
+
   return (
     <Stack
       alignItems="center"
       sx={{
         marginBottom: "1rem",
         backgroundColor: "primary.main",
-        paddingTop: "2rem",
+        paddingTop: "1rem",
       }}
     >
-      <Typography
-        variant="h4"
-        component="h1"
-        align="center"
-        sx={{ color: "white" }}
-      >
-        Answer a Question!
-      </Typography>
       <Typography
         variant="h5"
         component="h2"
         align="center"
         sx={{ color: "white" }}
       >
-        [user.name]
+        {props.author}
       </Typography>
       <Avatar
         sx={{
@@ -34,7 +29,9 @@ const CardHead = () => {
           height: "6rem",
           border: "0.25rem solid #fff",
         }}
-      />
+      >
+        {avatar}
+      </Avatar>
     </Stack>
   );
 };

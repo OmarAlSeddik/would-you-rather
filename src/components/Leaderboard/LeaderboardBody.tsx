@@ -16,15 +16,25 @@ const LeaderboardBody = () => {
     return loadedAvatarObject?.label;
   };
 
+  const sortedUserbase = userbase
+    .slice()
+    .sort(
+      (user1: any, user2: any) =>
+        (user2.votes ? Object.keys(user2.votes).length : 0) +
+        (user2.questions ? user2.questions.length : 0) -
+        ((user1.votes ? Object.keys(user1.votes).length : 0) +
+          (user1.questions ? user1.questions.length : 0))
+    );
+
   return (
     <TableBody>
-      {userbase.map((user: any) => (
+      {sortedUserbase.map((user: any) => (
         <StyledTableRow
           key={user.id}
           sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
         >
           <StyledTableCell align="center">
-            {(user.answers ? Object.keys(user.answers).length : 0) +
+            {(user.votes ? Object.keys(user.votes).length : 0) +
               (user.questions ? user.questions.length : 0)}
           </StyledTableCell>
           <StyledTableCell scope="row">
@@ -34,7 +44,7 @@ const LeaderboardBody = () => {
             {user.username}
           </StyledTableCell>
           <StyledTableCell align="center">
-            {user.answers ? Object.keys(user.answers).length : 0}
+            {user.votes ? Object.keys(user.votes).length : 0}
           </StyledTableCell>
           <StyledTableCell align="center">
             {user.questions ? user.questions.length : 0}

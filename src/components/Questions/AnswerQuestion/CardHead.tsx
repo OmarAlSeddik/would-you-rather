@@ -1,6 +1,7 @@
 import { Stack, Typography, Avatar } from "@mui/material";
+import useAvatar from "../../../hooks/useAvatar";
 
-const CardHead = () => {
+const CardHead = (props: any) => {
   return (
     <Stack
       alignItems="center"
@@ -16,7 +17,7 @@ const CardHead = () => {
         align="center"
         sx={{ color: "white" }}
       >
-        Ask a Question!
+        {props.question.author} Asks!
       </Typography>
       <Avatar
         sx={{
@@ -26,7 +27,9 @@ const CardHead = () => {
           height: "6rem",
           border: "0.25rem solid #fff",
         }}
-      />
+      >
+        {useAvatar(props.question.avatar)}
+      </Avatar>
     </Stack>
   );
 };

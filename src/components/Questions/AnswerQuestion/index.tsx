@@ -4,7 +4,13 @@ import { Box } from "@mui/system";
 import CardHead from "./CardHead";
 import CardBody from "./CardBody";
 
+import { useParams } from "react-router";
+import useQuestion from "../../../hooks/useQuestion";
+
 const AnswerQuestion = () => {
+  const params = useParams();
+  const question = useQuestion(params.id || "");
+
   return (
     <Box sx={{ height: "100vh" }}>
       <Card
@@ -20,8 +26,8 @@ const AnswerQuestion = () => {
           borderRadius: { xs: 0, md: "8px" },
         }}
       >
-        <CardHead />
-        <CardBody />
+        <CardHead question={question} />
+        <CardBody question={question} />
       </Card>
     </Box>
   );

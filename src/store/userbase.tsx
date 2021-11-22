@@ -10,19 +10,33 @@ const userbaseSlice = createSlice({
     replaceUserbase: (state, action) => (state = action.payload),
     addUser: (state, action) => {
       const newUser = action.payload;
-      const existingUser = state.find(
-        (user: any) => user.email === newUser.email
-      );
+      const existingUser = state.find((user: any) => user.id === newUser.id);
       if (!existingUser) {
         state.push({
           id: newUser.id,
           email: newUser.email,
           username: newUser.username,
           avatar: newUser.avatar,
-          answers: newUser.answers,
-          questions: newUser.questions,
         });
       }
+    },
+    addQuestionToUser: (state, action) => {
+      const userId = action.payload.userId;
+      const questionId = action.payload.questionId;
+      const user = state.find((user: any) => user.id === userId);
+      user.questions
+        ? user.questions.unshift(questionId)
+        : (user.questions = [questionId]);
+    },
+    addVoteToUser: (state, action) => {
+      const userId = action.payload.userId;
+      const questionId = action.payload.questionId;
+      const option = action.payload.option;
+      const user = state.find((user: any) => user.id === userId);
+
+      user.votes
+        ? (user.votes[questionId] = option)
+        : (user.votes = { [questionId]: option });
     },
   },
 });
