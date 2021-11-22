@@ -1,15 +1,17 @@
+// mui imports //
 import { Card } from "@mui/material";
 import { Box } from "@mui/system";
-
+// local component imports //
 import CardHead from "./CardHead";
 import CardBody from "./CardBody";
-
-import { useParams } from "react-router";
+// hook imports //
 import useQuestion from "../../../hooks/useQuestion";
+// routing imports //
+import { useParams } from "react-router";
 
 const AnswerQuestion = () => {
-  const params = useParams();
-  const question = useQuestion(params.question_id || "");
+  const questionId = useParams().question_id;
+  const question = useQuestion(questionId || "");
 
   return (
     <Box sx={{ height: "100vh" }}>

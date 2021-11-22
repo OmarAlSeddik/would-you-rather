@@ -1,3 +1,4 @@
+// mui imports //
 import { Stack, Typography } from "@mui/material";
 
 const PageNotFound = () => {

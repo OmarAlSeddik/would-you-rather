@@ -1,5 +1,7 @@
+// mui imports //
 import { Stack, Typography, Button } from "@mui/material";
-import { Link } from "react-router-dom";
+// routing imports //
+import { Link as RouterLink } from "react-router-dom";
 
 const CardBody = (props: any) => {
   return (
@@ -12,7 +14,7 @@ const CardBody = (props: any) => {
         Or...
       </Typography>
       <Button
-        component={Link}
+        component={RouterLink}
         to={`/questions/${props.id}`}
         variant="contained"
         sx={{ width: "6rem", margin: "0 auto" }}

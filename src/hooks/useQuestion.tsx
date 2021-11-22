@@ -1,3 +1,4 @@
+// redux imports //
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
 
@@ -11,3 +12,5 @@ const useQuestion = (questionId: string) => {
 };
 
 export default useQuestion;
+
+// This hook receives a question's id as an argument and returns the respective question's data object from the database. //

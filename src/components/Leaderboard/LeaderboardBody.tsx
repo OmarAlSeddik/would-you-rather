@@ -1,7 +1,9 @@
+// mui imports //
 import { TableBody, Avatar } from "@mui/material";
+// local component imports //
 import StyledTableRow from "./StyledTableRow";
 import StyledTableCell from "./StyledTableCell";
-
+// redux imports //
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 

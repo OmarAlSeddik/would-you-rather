@@ -1,20 +1,22 @@
+// local component imports //
 import Header from "./components/Header";
 import Auth from "./components/Auth";
 import Home from "./components/Home";
 import Leaderboard from "./components/Leaderboard";
 import AddQuestion from "./components/Questions/AskQuestion";
-import PageNotFound from "./components/PageNotFound";
 import AnswerQuestion from "./components/Questions/AnswerQuestion";
-
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { ThemeContextProvider } from "./context/ThemeContext";
-
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "./store";
-
+import PageNotFound from "./components/PageNotFound";
+// hook imports //
 import { useEffect } from "react";
+// redux imports //
+import { useDispatch, useSelector } from "react-redux";
 import { fetchUserbaseData, sendUserbaseData } from "./store/userbase";
 import { fetchQuestionsData, sendQuestionsData } from "./store/questions";
+import { RootState } from "./store";
+// context imports //
+import { ThemeContextProvider } from "./context/ThemeContext";
+// routing imports //
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 let isInitialRender = true;
 

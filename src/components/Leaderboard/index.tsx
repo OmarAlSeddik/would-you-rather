@@ -1,5 +1,7 @@
+// mui imports //
 import { Card, Typography, Stack, Divider, Table } from "@mui/material";
 import { Box } from "@mui/system";
+// local component imports //
 import LeaderboardBody from "./LeaderboardBody";
 import LeaderboardHead from "./LeaderboardHead";
 

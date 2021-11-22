@@ -1,3 +1,4 @@
+// redux imports //
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
 
@@ -12,3 +13,5 @@ const useAvatar = (avatarValue: string) => {
 };
 
 export default useAvatar;
+
+// This hook receives an avatar's string value as an argument and returns the respective avatar. //

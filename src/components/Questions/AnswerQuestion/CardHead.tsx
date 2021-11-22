@@ -1,4 +1,6 @@
+// mui imports //
 import { Stack, Typography, Avatar } from "@mui/material";
+// hook imports //
 import useAvatar from "../../../hooks/useAvatar";
 
 const CardHead = (props: any) => {

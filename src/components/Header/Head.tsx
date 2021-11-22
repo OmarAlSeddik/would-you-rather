@@ -1,3 +1,4 @@
+// mui imports //
 import {
   Paper,
   Stack,
@@ -9,10 +10,10 @@ import {
 } from "@mui/material";
 import QuestionAnswerTwoToneIcon from "@mui/icons-material/QuestionAnswerTwoTone";
 import LogoutIcon from "@mui/icons-material/Logout";
-
+// hook imports //
 import { useState } from "react";
 import useUser from "../../hooks/useUser";
-
+// redux imports //
 import { useDispatch } from "react-redux";
 import { authActions } from "../../store/auth";
 
@@ -26,9 +27,11 @@ const Head = () => {
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = anchorEl ? true : false;
+
   const handleOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };

@@ -1,5 +1,6 @@
+// mui imports //
 import { Card } from "@mui/material";
-
+// local component imports //
 import CardHead from "./CardHead";
 import CardBody from "./CardBody";
 

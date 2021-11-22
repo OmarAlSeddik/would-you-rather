@@ -1,20 +1,22 @@
-import { useState, useEffect } from "react";
-
+// mui imports //
 import { Tabs, Tab } from "@mui/material";
+// hook imports //
+import { useState, useEffect } from "react";
+// routing imports //
 import { Link as RouterLink, useLocation } from "react-router-dom";
 
 const Navigation = () => {
-  const location = useLocation();
+  const pathname = useLocation().pathname;
 
-  const [pageValue, setPageValue] = useState(location.pathname);
+  useEffect(() => {
+    setPageValue(pathname);
+  }, [pathname]);
+
+  const [pageValue, setPageValue] = useState(pathname);
 
   const handlePageChange = (event: React.ChangeEvent<{}>, newValue: string) => {
     setPageValue(newValue);
   };
-
-  useEffect(() => {
-    setPageValue(location.pathname);
-  }, [location.pathname]);
 
   return (
     <Tabs

@@ -1,5 +1,4 @@
-import { useState } from "react";
-
+// mui imports //
 import {
   Stack,
   Typography,
@@ -12,12 +11,15 @@ import {
   LinearProgressProps,
   Box,
 } from "@mui/material";
-
+// hook imports //
+import { useState } from "react";
+import useUser from "../../../hooks/useUser";
+// redux imports //
 import { useDispatch } from "react-redux";
 import { questionsActions } from "../../../store/questions";
 import { userbaseActions } from "../../../store/userbase";
-import useUser from "../../../hooks/useUser";
-import { Link } from "react-router-dom";
+// routing imports //
+import { Link as RouterLink } from "react-router-dom";
 
 const CardBody = (props: any) => {
   const dispatch = useDispatch();
@@ -151,7 +153,7 @@ const CardBody = (props: any) => {
         <Button
           variant="contained"
           sx={{ width: "6rem", margin: "1rem auto 0" }}
-          component={Link}
+          component={RouterLink}
           to="/"
         >
           Go Back

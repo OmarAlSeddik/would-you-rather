@@ -1,17 +1,21 @@
+// mui imports //
 import { Card, Stack, Typography, TextField, Button } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
-
+// hook imports //
 import { useRef } from "react";
-import { authActions } from "../../store/auth";
+// redux imports //
 import { useDispatch } from "react-redux";
-
+import { authActions } from "../../store/auth";
+// firebase imports //
 import { auth } from "../../firebase";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+// object imports //
+import manageErrors from "./manageErrors";
 
 const SignInCard = () => {
   const dispatch = useDispatch();
 
-  const switchAuthModeHandler = () => {
+  const handleToggleAuthMode = () => {
     dispatch(authActions.toggleAuthMode());
   };
 
@@ -27,52 +31,6 @@ const SignInCard = () => {
   };
 
   if (user) dispatch(authActions.login(user));
-
-  const emailError = () => {
-    return (
-      (error && error["message"] === "Firebase: Error (auth/invalid-email).") ||
-      (error &&
-        error["message"] === "Firebase: Error (auth/user-not-found).") ||
-      (error &&
-        error["message"] ===
-          "Firebase: Access to this account has been temporarily disabled due to many failed login attempts.")
-    );
-  };
-
-  const emailHelperText = () => {
-    if (error && error["message"] === "Firebase: Error (auth/invalid-email).") {
-      return "Invalid email.";
-    }
-
-    if (
-      error &&
-      error["message"] === "Firebase: Error (auth/user-not-found)."
-    ) {
-      return "User not found.";
-    }
-    if (
-      error &&
-      error["message"] ===
-        "Firebase: Access to this account has been temporarily disabled due to many failed login attempts."
-    ) {
-      return "Access to this account has been temporarily disabled due to many failed login attempts.";
-    } else return "Requires a valid email format.";
-  };
-
-  const passwordError = () => {
-    return (
-      error && error["message"] === "Firebase: Error (auth/wrong-password)."
-    );
-  };
-
-  const passwordHelperText = () => {
-    if (
-      error &&
-      error["message"] === "Firebase: Error (auth/wrong-password)."
-    ) {
-      return "Wrong password.";
-    } else return "Needs to be at least 6 characters long.";
-  };
 
   return (
     <Card
@@ -95,8 +53,8 @@ const SignInCard = () => {
           size="small"
           id="email"
           label="Email"
-          error={emailError()}
-          helperText={emailHelperText()}
+          error={manageErrors.emailError(error)}
+          helperText={manageErrors.emailHelperText(error)}
           inputRef={emailInputRef}
           sx={{ marginBottom: "0.5rem" }}
         />
@@ -105,8 +63,8 @@ const SignInCard = () => {
           id="password"
           label="Password"
           type="password"
-          error={passwordError()}
-          helperText={passwordHelperText()}
+          error={manageErrors.passwordError(error)}
+          helperText={manageErrors.passwordHelperText(error)}
           inputRef={passwordInputRef}
         />
         <LoadingButton
@@ -123,7 +81,7 @@ const SignInCard = () => {
           size="small"
           disableRipple
           sx={{ textTransform: "none" }}
-          onClick={switchAuthModeHandler}
+          onClick={handleToggleAuthMode}
         >
           Create a new account
         </Button>

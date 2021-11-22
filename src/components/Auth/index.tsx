@@ -1,10 +1,13 @@
+// mui imports //
 import { Stack, Typography, Link } from "@mui/material";
-import { useSelector } from "react-redux";
-import { RootState } from "../../store";
+// local component imports //
 import Demo from "./Demo";
 import Logo from "./Logo";
 import SignInCard from "./SignInCard";
 import SignUpCard from "./SignUpCard";
+// redux imports //
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
 
 const Auth = () => {
   const isSignIn = useSelector((state: RootState) => state.auth.isSignIn);
@@ -14,7 +17,7 @@ const Auth = () => {
       Forgot your password? Have a good think and try to remember.
     </Typography>
   );
-  
+
   const avatarCredit = (
     <Stack alignItems="center">
       <Typography align="center" sx={{ padding: "1rem" }}>

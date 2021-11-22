@@ -1,3 +1,4 @@
+// mui imports //
 import {
   Card,
   Stack,
@@ -8,20 +9,23 @@ import {
   Avatar,
 } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
-
-import { useState } from "react";
-import { authActions } from "../../store/auth";
+// hook imports //
+import { useState, useRef } from "react";
+// reduximports //
 import { useDispatch, useSelector } from "react-redux";
-import { auth } from "../../firebase";
-import { useRef } from "react";
-import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
-import { RootState } from "../../store";
+import { authActions } from "../../store/auth";
 import { userbaseActions } from "../../store/userbase";
+import { RootState } from "../../store";
+// firebase imports //
+import { auth } from "../../firebase";
+import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
+// object imports //
+import manageErrors from "./manageErrors";
 
 const SignUpCard = () => {
   const dispatch = useDispatch();
 
-  const switchAuthModeHandler = () => {
+  const handleToggleAuthMode = () => {
     dispatch(authActions.toggleAuthMode());
   };
 
@@ -39,46 +43,9 @@ const SignUpCard = () => {
 
   const avatars: any = useSelector<RootState>((state) => state.avatars);
   const [avatar, setAvatar] = useState("1");
+
   const handleAvatarChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setAvatar(event.target.value);
-  };
-
-  const emailError = () => {
-    return (
-      (error && error["message"] === "Firebase: Error (auth/invalid-email).") ||
-      (error &&
-        error["message"] === "Firebase: Error (auth/email-already-in-use).")
-    );
-  };
-
-  const emailHelperText = () => {
-    if (error && error["message"] === "Firebase: Error (auth/invalid-email).") {
-      return "Invalid email.";
-    }
-    if (
-      error &&
-      error["message"] === "Firebase: Error (auth/email-already-in-use)."
-    ) {
-      return "Email already in use.";
-    } else return "Requires a valid email format.";
-  };
-
-  const passwordError = () => {
-    return (
-      error &&
-      error["message"] ===
-        "Firebase: Password should be at least 6 characters (auth/weak-password)."
-    );
-  };
-
-  const passwordHelperText = () => {
-    if (
-      error &&
-      error["message"] ===
-        "Firebase: Password should be at least 6 characters (auth/weak-password)."
-    ) {
-      return "Weak password.";
-    } else return "Needs to be at least 6 characters long.";
   };
 
   if (user) {
@@ -105,7 +72,7 @@ const SignUpCard = () => {
           >
             Your account has been created successfully!
           </Typography>
-          <Button variant="contained" onClick={switchAuthModeHandler}>
+          <Button variant="contained" onClick={handleToggleAuthMode}>
             Sign In
           </Button>
         </Stack>
@@ -135,8 +102,8 @@ const SignUpCard = () => {
           id="email"
           label="Email"
           inputRef={emailInputRef}
-          error={emailError()}
-          helperText={emailHelperText()}
+          error={manageErrors.emailError(error)}
+          helperText={manageErrors.emailHelperText(error)}
           sx={{ marginBottom: "0.5rem" }}
         />
         <TextField
@@ -145,8 +112,8 @@ const SignUpCard = () => {
           label="Password"
           type="password"
           inputRef={passwordInputRef}
-          error={passwordError()}
-          helperText={passwordHelperText()}
+          error={manageErrors.passwordError(error)}
+          helperText={manageErrors.passwordHelperText(error)}
           sx={{ marginBottom: "0.5rem" }}
         />
         <TextField
@@ -192,7 +159,7 @@ const SignUpCard = () => {
           size="small"
           disableRipple
           sx={{ textTransform: "none" }}
-          onClick={switchAuthModeHandler}
+          onClick={handleToggleAuthMode}
         >
           Sign in with an existing account
         </Button>

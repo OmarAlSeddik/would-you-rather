@@ -1,4 +1,6 @@
+// mui imports //
 import { AppBar } from "@mui/material";
+// local component imports //
 import Head from "./Head";
 import Navigation from "./Navigation";
 
