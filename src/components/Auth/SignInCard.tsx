@@ -37,6 +37,7 @@ const SignInCard = () => {
       raised
       sx={{
         width: "21rem",
+        maxWidth: "100vw",
         padding: "1rem 2rem",
       }}
     >

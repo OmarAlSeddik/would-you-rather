@@ -12,7 +12,7 @@ const CardHead = () => {
       sx={{
         marginBottom: "1rem",
         backgroundColor: "primary.main",
-        paddingTop: "2rem",
+        paddingTop: "1rem",
       }}
     >
       <Typography

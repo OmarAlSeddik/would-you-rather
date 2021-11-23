@@ -1,5 +1,5 @@
 // mui imports //
-import { TableBody, Avatar } from "@mui/material";
+import { TableBody, Avatar, Typography, Stack } from "@mui/material";
 // local component imports //
 import StyledTableRow from "./StyledTableRow";
 import StyledTableCell from "./StyledTableCell";
@@ -36,8 +36,20 @@ const LeaderboardBody = () => {
           sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
         >
           <StyledTableCell align="center">
-            {(user.votes ? Object.keys(user.votes).length : 0) +
-              (user.questions ? user.questions.length : 0)}
+            <Stack>
+              <Typography
+                sx={{
+                  padding: "0.25rem 0.5rem",
+                  borderRadius: "8px",
+                  backgroundColor: "success.main",
+                  color: "white",
+                  margin: "auto auto",
+                }}
+              >
+                {(user.votes ? Object.keys(user.votes).length : 0) +
+                  (user.questions ? user.questions.length : 0)}
+              </Typography>
+            </Stack>
           </StyledTableCell>
           <StyledTableCell scope="row">
             <Avatar>{loadAvatar(user)}</Avatar>

@@ -139,7 +139,13 @@ const SignUpCard = () => {
               value={avatar.value}
               sx={{ margin: "0 auto" }}
             >
-              <Avatar sx={{ width: "5rem", height: "5rem", margin: "0 auto" }}>
+              <Avatar
+                sx={{
+                  width: "6rem",
+                  height: "6rem",
+                  margin: "0 auto",
+                }}
+              >
                 {avatar.label}
               </Avatar>
             </MenuItem>

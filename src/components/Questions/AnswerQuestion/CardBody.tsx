@@ -81,7 +81,7 @@ const CardBody = (props: any) => {
 
     return (
       <Stack sx={{ width: "90%", margin: "0 auto", padding: "2rem 0" }}>
-        <Typography variant="h5" component="h2">
+        <Typography variant="h5" component="h2" sx={{ marginBottom: "1rem" }}>
           Would you rather...
         </Typography>
         {user.votes[props.question.id] === "1" ? (
@@ -90,17 +90,15 @@ const CardBody = (props: any) => {
             sx={{
               padding: "1rem",
               marginBottom: "1rem",
-              backgroundColor: "success.main",
             }}
           >
             <Stack>
-              <Typography sx={{ color: "white" }}>
-                {props.question.option1}
-              </Typography>
+              <Typography>{props.question.option1}</Typography>
               <LinearProgressWithLabel
+                color="success"
                 value={(option1Votes * 100) / totalVotes}
               />
-              <Typography align="center" sx={{ color: "white" }}>
+              <Typography align="center">
                 {option1Votes} out of {totalVotes} votes.
               </Typography>
             </Stack>
@@ -110,6 +108,7 @@ const CardBody = (props: any) => {
             <Stack>
               <Typography>{props.question.option1}</Typography>
               <LinearProgressWithLabel
+                color="error"
                 value={(option1Votes * 100) / totalVotes}
               />
               <Typography align="center">
@@ -120,28 +119,24 @@ const CardBody = (props: any) => {
         )}
 
         {user.votes[props.question.id] === "2" ? (
-          <Card
-            raised
-            sx={{ padding: "1rem", backgroundColor: "success.main" }}
-          >
+          <Card raised sx={{ padding: "1rem", marginBottom: "1rem" }}>
             <Stack>
-              <Typography sx={{ color: "white" }}>
-                {props.question.option2}
-              </Typography>
+              <Typography>{props.question.option2}</Typography>
               <LinearProgressWithLabel
+                color="success"
                 value={(option2Votes * 100) / totalVotes}
-                sx={{ backgroundColor: "white" }}
               />
-              <Typography align="center" sx={{ color: "white" }}>
+              <Typography align="center">
                 {option2Votes} out of {totalVotes} votes.
               </Typography>
             </Stack>
           </Card>
         ) : (
-          <Card raised sx={{ padding: "1rem" }}>
+          <Card raised sx={{ padding: "1rem", marginBottom: "1rem" }}>
             <Stack>
               <Typography>{props.question.option2}</Typography>
               <LinearProgressWithLabel
+                color="error"
                 value={(option2Votes * 100) / totalVotes}
               />
               <Typography align="center">
@@ -150,9 +145,12 @@ const CardBody = (props: any) => {
             </Stack>
           </Card>
         )}
+        <Typography variant="caption" align="center">
+          The green bar denotes where your vote has been placed.
+        </Typography>
         <Button
           variant="contained"
-          sx={{ width: "6rem", margin: "1rem auto 0" }}
+          sx={{ width: "6rem", margin: "0 auto", textTransform: "none" }}
           component={RouterLink}
           to="/"
         >
@@ -164,7 +162,7 @@ const CardBody = (props: any) => {
 
   return (
     <Stack sx={{ width: "90%", margin: "0 auto", padding: "2rem 0" }}>
-      <Typography variant="h5" component="h2">
+      <Typography variant="h5" component="h2" sx={{ marginBottom: "1rem" }}>
         Would you rather...
       </Typography>
       <RadioGroup
@@ -173,20 +171,29 @@ const CardBody = (props: any) => {
         value={answer}
         onChange={handleAnswerChange}
       >
-        <FormControlLabel
-          value="1"
-          control={<Radio />}
-          label={props.question.option1}
-        />
-        <FormControlLabel
-          value="2"
-          control={<Radio />}
-          label={props.question.option2}
-        />
+        <Card raised sx={{ marginBottom: "1rem" }}>
+          <FormControlLabel
+            value="1"
+            control={<Radio />}
+            label={props.question.option1}
+            sx={{ width: "100%", padding: "1rem" }}
+          />
+        </Card>
+        <Card raised sx={{ marginBottom: "1rem" }}>
+          <FormControlLabel
+            value="2"
+            control={<Radio />}
+            label={props.question.option2}
+            sx={{ width: "100%", padding: "1rem" }}
+          />
+        </Card>
       </RadioGroup>
+      <Typography variant="caption" align="center">
+        You can not undo your vote.
+      </Typography>
       <Button
         variant="contained"
-        sx={{ width: "6rem", margin: "0 auto" }}
+        sx={{ width: "6rem", margin: "0 auto", textTransform: "none" }}
         onClick={handleSubmit}
       >
         Answer

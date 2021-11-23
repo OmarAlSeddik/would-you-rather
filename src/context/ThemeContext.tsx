@@ -7,7 +7,7 @@ import {
   ThemeProvider,
   CssBaseline,
 } from "@mui/material";
-import { blue } from "@mui/material/colors";
+import { grey } from "@mui/material/colors";
 // hook imports //
 import { createContext, useMemo } from "react";
 
@@ -22,13 +22,13 @@ export const ThemeContextProvider = (props: any) => {
       createTheme({
         palette: {
           primary: {
-            main: blue[900],
+            main: grey[900],
           },
           secondary: {
-            main: alpha("#000", 0.2),
+            main: alpha(grey[900], 0.1),
           },
           background: {
-            default: alpha(blue[400], 0.1),
+            default: alpha(grey[900], 0.2),
           },
         },
         shape: {

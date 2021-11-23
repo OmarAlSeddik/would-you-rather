@@ -1,5 +1,11 @@
 // mui imports //
-import { Card, Stack, ToggleButton, ToggleButtonGroup } from "@mui/material";
+import {
+  Card,
+  Stack,
+  ToggleButton,
+  ToggleButtonGroup,
+  Typography,
+} from "@mui/material";
 import { Box } from "@mui/system";
 // local component imports //
 import QuestionCard from "../Questions/QuestionCard";
@@ -26,7 +32,7 @@ const Home = () => {
   const questions = useSelector((state: RootState) => state.questions);
 
   const unansweredQuestions = (
-    <Stack>
+    <Stack sx={{ padding: "1rem 1rem 0" }}>
       {questions
         .filter((question: any) => {
           if (!user.votes) return true;
@@ -41,11 +47,25 @@ const Home = () => {
             avatar={question.avatar}
           />
         ))}
+      {questions.filter((question: any) => {
+        if (!user.votes) return true;
+        if (!user.votes.hasOwnProperty(question.id)) return true;
+        else return false;
+      }).length === 0 && (
+        <Typography
+          align="center"
+          variant="h4"
+          component="p"
+          sx={{ marginBottom: "1rem", color: "text.secondary" }}
+        >
+          There are no more questions for you to answer.
+        </Typography>
+      )}
     </Stack>
   );
 
   const answeredQuestions = (
-    <Stack>
+    <Stack sx={{ padding: "1rem 1rem 0" }}>
       {questions
         .filter(
           (question: any) =>
@@ -59,15 +79,27 @@ const Home = () => {
             avatar={question.avatar}
           />
         ))}
+      {questions.filter(
+        (question: any) => user.votes && user.votes.hasOwnProperty(question.id)
+      ).length === 0 && (
+        <Typography
+          align="center"
+          variant="h4"
+          component="p"
+          sx={{ marginBottom: "1rem", color: "text.secondary" }}
+        >
+          You haven't answered any questions yet.
+        </Typography>
+      )}
     </Stack>
   );
 
   return (
-    <Box sx={{ height: "100vh" }}>
+    <Box>
       <Card
         raised
         sx={{
-          margin: "9rem auto 0",
+          margin: "9rem auto 4.5rem",
           width: "56.25rem",
           maxWidth: "100vw",
           borderRadius: { xs: 0, md: "8px" },
@@ -84,14 +116,14 @@ const Home = () => {
             <ToggleButton
               disableRipple
               value="unanswered"
-              sx={{ borderRadius: 0 }}
+              sx={{ borderRadius: 0, textTransform: "none" }}
             >
               Unasnwered Questions
             </ToggleButton>
             <ToggleButton
               disableRipple
               value="answered"
-              sx={{ borderRadius: 0 }}
+              sx={{ borderRadius: 0, textTransform: "none" }}
             >
               Answered Questions
             </ToggleButton>

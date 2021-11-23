@@ -6,7 +6,11 @@ import Navigation from "./Navigation";
 
 const Header = () => {
   return (
-    <AppBar color="default" position="fixed" sx={{ borderRadius: 0 }}>
+    <AppBar
+      color="default"
+      position="fixed"
+      sx={{ borderRadius: 0, maxWidth: "100vw" }}
+    >
       <Head />
       <Navigation />
     </AppBar>

@@ -46,7 +46,6 @@ const Auth = () => {
       <Demo />
       <Typography
         align="center"
-        color="primary"
         variant="h5"
         component="p"
         sx={{ marginBottom: "1rem" }}

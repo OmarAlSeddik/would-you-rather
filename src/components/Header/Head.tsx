@@ -67,7 +67,7 @@ const Head = () => {
         <Menu
           anchorEl={anchorEl}
           anchorOrigin={{
-            vertical: "bottom",
+            vertical: "top",
             horizontal: "left",
           }}
           open={open}
