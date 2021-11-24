@@ -1,16 +1,11 @@
 // mui imports //
 import { Stack, Typography, Avatar } from "@mui/material";
-// hook imports //
-import useUser from "../../../hooks/useUser";
 
-const CardHead = () => {
-  const [user, avatar] = useUser();
-
+const CardHead = (props: any) => {
   return (
     <Stack
       alignItems="center"
       sx={{
-        marginBottom: "1rem",
         backgroundColor: "primary.main",
         paddingTop: "1rem",
       }}
@@ -21,7 +16,7 @@ const CardHead = () => {
         align="center"
         sx={{ color: "white" }}
       >
-        Ask a Question, {user.username}!
+        Ask a Question, {props.user.username}!
       </Typography>
       <Avatar
         sx={{
@@ -32,7 +27,7 @@ const CardHead = () => {
           border: "0.25rem solid #fff",
         }}
       >
-        {avatar}
+        {props.avatar}
       </Avatar>
     </Stack>
   );

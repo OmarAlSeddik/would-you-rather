@@ -11,11 +11,11 @@ import {
 import LoadingButton from "@mui/lab/LoadingButton";
 // hook imports //
 import { useState, useRef } from "react";
+import useAvatars from "../../hooks/useAvatars";
 // reduximports //
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { authActions } from "../../store/auth";
 import { userbaseActions } from "../../store/userbase";
-import { RootState } from "../../store";
 // firebase imports //
 import { auth } from "../../firebase";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
@@ -41,7 +41,7 @@ const SignUpCard = () => {
     return createUserWithEmailAndPassword(email, password);
   };
 
-  const avatars: any = useSelector<RootState>((state) => state.avatars);
+  const avatars = useAvatars();
   const [avatar, setAvatar] = useState("1");
 
   const handleAvatarChange = (event: React.ChangeEvent<HTMLInputElement>) => {

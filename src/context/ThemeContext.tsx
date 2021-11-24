@@ -7,7 +7,7 @@ import {
   ThemeProvider,
   CssBaseline,
 } from "@mui/material";
-import { grey } from "@mui/material/colors";
+import { indigo } from "@mui/material/colors";
 // hook imports //
 import { createContext, useMemo } from "react";
 
@@ -22,13 +22,13 @@ export const ThemeContextProvider = (props: any) => {
       createTheme({
         palette: {
           primary: {
-            main: grey[900],
+            main: indigo[900],
           },
           secondary: {
-            main: alpha(grey[900], 0.1),
+            main: alpha(indigo[900], 0.1),
           },
           background: {
-            default: alpha(grey[900], 0.2),
+            default: alpha(indigo[900], 0.2),
           },
         },
         shape: {

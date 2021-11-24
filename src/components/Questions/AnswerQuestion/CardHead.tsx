@@ -8,9 +8,8 @@ const CardHead = (props: any) => {
     <Stack
       alignItems="center"
       sx={{
-        marginBottom: "1rem",
         backgroundColor: "primary.main",
-        paddingTop: "2rem",
+        paddingTop: "1rem",
       }}
     >
       <Typography

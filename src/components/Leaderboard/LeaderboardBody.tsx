@@ -6,10 +6,12 @@ import StyledTableCell from "./StyledTableCell";
 // redux imports //
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
+import useAvatars from "../../hooks/useAvatars";
 
 const LeaderboardBody = () => {
   const userbase = useSelector((state: RootState) => state.userbase);
-  const avatars = useSelector((state: RootState) => state.avatars);
+
+  const avatars = useAvatars();
   const loadAvatar = (user: any) => {
     const loadedAvatarObject = avatars.find(
       (avatarObject) => avatarObject.value === user.avatar
@@ -41,7 +43,7 @@ const LeaderboardBody = () => {
                 sx={{
                   padding: "0.25rem 0.5rem",
                   borderRadius: "8px",
-                  backgroundColor: "success.main",
+                  backgroundColor: "primary.main",
                   color: "white",
                   margin: "auto auto",
                 }}

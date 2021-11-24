@@ -1,23 +1,21 @@
 // mui imports //
-import {
-  Card,
-  Stack,
-  ToggleButton,
-  ToggleButtonGroup,
-  Typography,
-} from "@mui/material";
+import { Card, Stack, ToggleButton, ToggleButtonGroup } from "@mui/material";
 import { Box } from "@mui/system";
 // local component imports //
-import QuestionCard from "../Questions/QuestionCard";
+import Answered from "./Answered";
 // hook imports //
 import { useState } from "react";
 import useUser from "../../hooks/useUser";
 // redux imports //
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
+import Unanswered from "./Unanswered";
 
 const Home = () => {
   const [user] = useUser();
+
+  const questions = useSelector((state: RootState) => state.questions);
+
   const [tapValue, setTabValue] = useState("unanswered");
 
   const handleTabValue = (
@@ -28,71 +26,6 @@ const Home = () => {
       setTabValue(newTapValue);
     }
   };
-
-  const questions = useSelector((state: RootState) => state.questions);
-
-  const unansweredQuestions = (
-    <Stack sx={{ padding: "1rem 1rem 0" }}>
-      {questions
-        .filter((question: any) => {
-          if (!user.votes) return true;
-          if (!user.votes.hasOwnProperty(question.id)) return true;
-          else return false;
-        })
-        .map((question: any) => (
-          <QuestionCard
-            id={question.id}
-            option1={question.option1}
-            author={question.author}
-            avatar={question.avatar}
-          />
-        ))}
-      {questions.filter((question: any) => {
-        if (!user.votes) return true;
-        if (!user.votes.hasOwnProperty(question.id)) return true;
-        else return false;
-      }).length === 0 && (
-        <Typography
-          align="center"
-          variant="h4"
-          component="p"
-          sx={{ marginBottom: "1rem", color: "text.secondary" }}
-        >
-          There are no more questions for you to answer.
-        </Typography>
-      )}
-    </Stack>
-  );
-
-  const answeredQuestions = (
-    <Stack sx={{ padding: "1rem 1rem 0" }}>
-      {questions
-        .filter(
-          (question: any) =>
-            user.votes && user.votes.hasOwnProperty(question.id)
-        )
-        .map((question: any) => (
-          <QuestionCard
-            id={question.id}
-            option1={question.option1}
-            author={question.author}
-            avatar={question.avatar}
-          />
-        ))}
-      {questions.filter(
-        (question: any) => user.votes && user.votes.hasOwnProperty(question.id)
-      ).length === 0 && (
-        <Typography
-          align="center"
-          variant="h4"
-          component="p"
-          sx={{ marginBottom: "1rem", color: "text.secondary" }}
-        >
-          You haven't answered any questions yet.
-        </Typography>
-      )}
-    </Stack>
-  );
 
   return (
     <Box>
@@ -128,7 +61,11 @@ const Home = () => {
               Answered Questions
             </ToggleButton>
           </ToggleButtonGroup>
-          {tapValue === "unanswered" ? unansweredQuestions : answeredQuestions}
+          {tapValue === "unanswered" ? (
+            <Unanswered user={user} questions={questions} />
+          ) : (
+            <Answered user={user} questions={questions} />
+          )}
         </Stack>
       </Card>
     </Box>

@@ -5,13 +5,20 @@ import { Box } from "@mui/system";
 import CardHead from "./CardHead";
 import CardBody from "./CardBody";
 // hook imports //
+import useUser from "../../../hooks/useUser";
 import useQuestion from "../../../hooks/useQuestion";
 // routing imports //
 import { useParams } from "react-router";
+import Answered from "./Answered";
 
 const AnswerQuestion = () => {
   const questionId = useParams().question_id;
+  const [user] = useUser();
   const question = useQuestion(questionId || "");
+
+  const userPreviouslyAnswered =
+    (question.option1Votes && question.option1Votes.includes(user.id)) ||
+    (question.option2Votes && question.option2Votes.includes(user.id));
 
   return (
     <Box sx={{ height: "100vh" }}>
@@ -29,7 +36,11 @@ const AnswerQuestion = () => {
         }}
       >
         <CardHead question={question} />
-        <CardBody question={question} />
+        {userPreviouslyAnswered ? (
+          <Answered user={user} question={question} />
+        ) : (
+          <CardBody user={user} question={question} />
+        )}
       </Card>
     </Box>
   );

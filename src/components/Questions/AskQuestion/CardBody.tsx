@@ -2,15 +2,12 @@
 import { Stack, Typography, TextField, Button } from "@mui/material";
 // hook imports //
 import { useRef, useState } from "react";
-import useUser from "../../../hooks/useUser";
 // redux imports //
 import { useDispatch } from "react-redux";
 import { questionsActions } from "../../../store/questions";
 import { userbaseActions } from "../../../store/userbase";
 
-const CardBody = () => {
-  const [user] = useUser();
-  const [isSubmitted, setIsSubmitted] = useState(false);
+const CardBody = (props: any) => {
   const dispatch = useDispatch();
 
   const [option1Error, setOption1Error] = useState(false);
@@ -29,51 +26,26 @@ const CardBody = () => {
     } else {
       dispatch(
         questionsActions.addQuestion({
-          id: user.id + new Date().getTime(),
-          author: user.username,
+          id: props.user.id + new Date().getTime(),
+          author: props.user.username,
           date: new Date(),
-          avatar: user.avatar,
+          avatar: props.user.avatar,
           option1,
           option2,
         })
       );
       dispatch(
         userbaseActions.addQuestionToUser({
-          userId: user.id,
-          questionId: user.id + new Date().getTime(),
+          userId: props.user.id,
+          questionId: props.user.id + new Date().getTime(),
         })
       );
-      setIsSubmitted(true);
+      props.submit();
     }
   };
 
-  const goBack = () => {
-    setIsSubmitted(false);
-  };
-
-  if (isSubmitted)
-    return (
-      <Stack sx={{ width: "90%", margin: "0 auto", padding: "2rem 0" }}>
-        <Typography
-          variant="h4"
-          component="h2"
-          align="center"
-          sx={{ marginBottom: "1rem", color: "success.main" }}
-        >
-          Your question has been created successfully!
-        </Typography>
-        <Button
-          variant="contained"
-          sx={{ width: "12rem", margin: "0 auto", textTransform: "none" }}
-          onClick={goBack}
-        >
-          Ask Another Question?
-        </Button>
-      </Stack>
-    );
-
   return (
-    <Stack sx={{ width: "90%", margin: "0 auto", padding: "2rem 0" }}>
+    <Stack sx={{ width: "90%", margin: "0 auto", padding: "3rem 0 1rem" }}>
       <Typography variant="h6" component="p" sx={{ marginBottom: "0.25rem" }}>
         Would you rather...
       </Typography>
