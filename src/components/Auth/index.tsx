@@ -6,12 +6,15 @@ import Logo from "./Logo";
 import SignInCard from "./SignInCard";
 import SignUpCard from "./SignUpCard";
 import Footnote from "./Footnote";
-// redux imports //
-import { useSelector } from "react-redux";
-import { RootState } from "../../store";
+// hook imports //
+import useStickyState from "../../hooks/useStickyState";
 
 const Auth = () => {
-  const isSignIn = useSelector((state: RootState) => state.auth.isSignIn);
+  const [isSignIn, setIsSignIn] = useStickyState(true, "isSignIn");
+
+  const handleToggleSignIn = () => {
+    setIsSignIn((previous: boolean) => !previous);
+  };
 
   return (
     <Stack
@@ -29,7 +32,11 @@ const Auth = () => {
       >
         -- OR --
       </Typography>
-      {isSignIn ? <SignInCard /> : <SignUpCard />}
+      {isSignIn ? (
+        <SignInCard handleToggleSignIn={handleToggleSignIn} />
+      ) : (
+        <SignUpCard handleToggleSignIn={handleToggleSignIn} />
+      )}
       <Footnote isSignIn={isSignIn} />
     </Stack>
   );

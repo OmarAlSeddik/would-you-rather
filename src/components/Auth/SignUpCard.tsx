@@ -14,7 +14,6 @@ import { useState, useRef } from "react";
 import useAvatars from "../../hooks/useAvatars";
 // reduximports //
 import { useDispatch } from "react-redux";
-import { authActions } from "../../store/auth";
 import { userbaseActions } from "../../store/userbase";
 // firebase imports //
 import { auth } from "../../firebase";
@@ -22,12 +21,8 @@ import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 // object imports //
 import manageErrors from "./manageErrors";
 
-const SignUpCard = () => {
+const SignUpCard = (props: any) => {
   const dispatch = useDispatch();
-
-  const handleToggleAuthMode = () => {
-    dispatch(authActions.toggleAuthMode());
-  };
 
   const usernameInputRef = useRef<HTMLInputElement>(null);
   const emailInputRef = useRef<HTMLInputElement>(null);
@@ -72,7 +67,7 @@ const SignUpCard = () => {
           >
             Your account has been created successfully!
           </Typography>
-          <Button variant="contained" onClick={handleToggleAuthMode}>
+          <Button variant="contained" onClick={props.handleToggleSignIn}>
             Sign In
           </Button>
         </Stack>
@@ -165,7 +160,7 @@ const SignUpCard = () => {
           size="small"
           disableRipple
           sx={{ textTransform: "none" }}
-          onClick={handleToggleAuthMode}
+          onClick={props.handleToggleSignIn}
         >
           Sign in with an existing account
         </Button>

@@ -4,7 +4,7 @@ import { Box } from "@mui/system";
 // local component imports //
 import Answered from "./Answered";
 // hook imports //
-import { useState } from "react";
+import useStickyState from "../../hooks/useStickyState";
 import useUser from "../../hooks/useUser";
 // redux imports //
 import { useSelector } from "react-redux";
@@ -16,7 +16,7 @@ const Home = () => {
 
   const questions = useSelector((state: RootState) => state.questions);
 
-  const [tapValue, setTabValue] = useState("unanswered");
+  const [tapValue, setTabValue] = useStickyState("unanswered", "tapValue");
 
   const handleTabValue = (
     event: React.MouseEvent<HTMLElement>,

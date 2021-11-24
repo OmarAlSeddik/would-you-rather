@@ -62,7 +62,9 @@ const Head = () => {
           onClick={handleOpen}
         >
           <Avatar sx={{ marginRight: "0.5rem" }}>{avatar}</Avatar>
-          <Typography>{user.username}</Typography>
+          <Typography sx={{ fontSize: { xs: "0.75rem", sm: "1rem" } }}>
+            {user.username}
+          </Typography>
         </ButtonBase>
         <Menu
           anchorEl={anchorEl}

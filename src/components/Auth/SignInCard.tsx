@@ -12,12 +12,8 @@ import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 // object imports //
 import manageErrors from "./manageErrors";
 
-const SignInCard = () => {
+const SignInCard = (props: any) => {
   const dispatch = useDispatch();
-
-  const handleToggleAuthMode = () => {
-    dispatch(authActions.toggleAuthMode());
-  };
 
   const emailInputRef = useRef<HTMLInputElement>(null);
   const passwordInputRef = useRef<HTMLInputElement>(null);
@@ -82,7 +78,7 @@ const SignInCard = () => {
           size="small"
           disableRipple
           sx={{ textTransform: "none" }}
-          onClick={handleToggleAuthMode}
+          onClick={props.handleToggleSignIn}
         >
           Create a new account
         </Button>

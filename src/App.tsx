@@ -22,7 +22,9 @@ let isInitialRender = true;
 
 const App = () => {
   const dispatch = useDispatch();
-  const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
+  const loggedInUserId = useSelector(
+    (state: RootState) => state.auth.loggedInUserId
+  );
   const userbase = useSelector((state: RootState) => state.userbase);
   const questions = useSelector((state: RootState) => state.questions);
 
@@ -40,31 +42,35 @@ const App = () => {
   return (
     <ThemeContextProvider>
       <BrowserRouter>
-        {isLoggedIn && <Header />}
+        {loggedInUserId && <Header />}
         <Routes>
           <Route
             path="/auth"
-            element={!isLoggedIn ? <Auth /> : <Navigate to="/" />}
+            element={!loggedInUserId ? <Auth /> : <Navigate to="/" />}
           />
           <Route
             path="/"
-            element={isLoggedIn ? <Home /> : <Navigate to="/auth" />}
+            element={loggedInUserId ? <Home /> : <Navigate to="/auth" />}
           />
           <Route
             path="/add"
-            element={isLoggedIn ? <AddQuestion /> : <Navigate to="/auth" />}
+            element={loggedInUserId ? <AddQuestion /> : <Navigate to="/auth" />}
           />
           <Route
             path="/leaderboard"
-            element={isLoggedIn ? <Leaderboard /> : <Navigate to="/auth" />}
+            element={loggedInUserId ? <Leaderboard /> : <Navigate to="/auth" />}
           />
           <Route
             path="/questions/:question_id"
-            element={isLoggedIn ? <AnswerQuestion /> : <Navigate to="/auth" />}
+            element={
+              loggedInUserId ? <AnswerQuestion /> : <Navigate to="/auth" />
+            }
           />
           <Route
             path="*"
-            element={isLoggedIn ? <PageNotFound /> : <Navigate to="/auth" />}
+            element={
+              loggedInUserId ? <PageNotFound /> : <Navigate to="/auth" />
+            }
           />
         </Routes>
       </BrowserRouter>

@@ -10,11 +10,14 @@ import useQuestion from "../../../hooks/useQuestion";
 // routing imports //
 import { useParams } from "react-router";
 import Answered from "./Answered";
+import PageNotFound from "../../PageNotFound";
 
 const AnswerQuestion = () => {
   const questionId = useParams().question_id;
   const [user] = useUser();
   const question = useQuestion(questionId || "");
+
+  if (!question) return <PageNotFound />;
 
   const userPreviouslyAnswered =
     (question.option1Votes && question.option1Votes.includes(user.id)) ||
