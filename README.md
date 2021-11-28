@@ -1,7 +1,8 @@
 # Would You Rather Project
 This is my personal take of Udacity's Would You Rather project, with Firebase's Realtime database and a MUI design. This also happens to be my second completed React project. It has only been 4 months since my first line of HTML code as of the date of writing this!
+Currently rebuilding the entire project in Next.js with added features.
 ## Demo
-### https://would-you-rather-omaralseddik.netlify.app/
+### Took down temporarily. Will reupload after the migration to Next.js is complete...
 ## Installation
 You can either download the zip file and extract it or download the project through git:
 ```
